@@ -1,0 +1,302 @@
+<html lang="en" data-bs-theme="auto" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Terminal Control · Blog</title>
+    <link href="../../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../assets/dist/js/fontawesome.min.js"></script>
+    <script src="../../assets/dist/js/brands.min.js"></script>
+    <script src="../../assets/dist/js/all.min.js"></script>
+</head>
+
+<main>
+    <section class="py-5 container-sm">
+        <h1 class="fw-light text-center"><a style="text-decoration: none; color: inherit" href="https://google.com">Terminal Control</a></h1>
+        <div class="row py-lg-5 px-xl-5">
+            <h3 class="fw-light text-info-emphasis">Wot I Watched and all the othe</h3>
+            <h5 class="fw-lighter text">January 2nd 2026</h5>
+        </div>
+
+        <div class="mx-lg-5 fs-5">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin velit nulla, luctus quis neque et, fringilla sodales est. Sed placerat dapibus justo ac laoreet. Aenean convallis diam vel magna gravida rutrum. Morbi sit amet mollis erat. Nunc at faucibus ligula. Duis imperdiet facilisis congue. Etiam cursus purus a tincidunt ullamcorper. Fusce aliquam diam quis lectus vehicula, sed consequat tellus commodo. Nam ante velit, ultrices a consectetur ac, mattis in metus. Morbi est odio, dignissim et risus et, egestas consequat lorem. Sed mi magna, tempor in porttitor in, gravida eu sem. Nunc consequat feugiat enim vel porta. Pellentesque hendrerit elementum augue sit amet dignissim.</p>
+            <div class="justify-content-center">
+                <canvas id="booksRead2025vs2024"></canvas>
+                <canvas id="moviesTv2025"></canvas>
+                <canvas id="moviesTv2025vs2024"></canvas>
+                <canvas id="moviesTv2025Rating"></canvas>
+                <canvas id="watchByMonth2025"></canvas>
+                <canvas id="conclusionChart"></canvas>
+            </div>
+        </div>
+        <hr />
+        <div class="py-5 mx-lg-5 fs-6">
+            <a href="../../rss.xml"><i class="fa-solid fa-rss"></i></a>
+        </div>
+    </section>
+</main>
+
+<script src="../../assets/dist/js/chart.js"></script>
+
+<script>
+    const ctxBooksRead2025vs2024 = document.getElementById('booksRead2025vs2024');
+
+    const data = [
+        {year: 2024, count: 11},
+        {year: 2025, count: 1},
+    ];
+
+    new Chart(ctxBooksRead2025vs2024, {
+        type: 'pie',
+        data: {
+            labels: data.map(row => row.year),
+            datasets: [
+                {
+                    label: 'Books Read By Year',
+                    data: data.map(row => row.count)
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Books Read 2024 vs 2025'
+                }
+            }
+        },
+    });
+
+    const ctxMovievsTv2025 = document.getElementById('moviesTv2025');
+
+    const data2 = [
+        {media: "TV Shows", count: 30},
+        {media: "Movies", count: 81},
+    ];
+
+    new Chart(ctxMovievsTv2025, {
+        type: 'pie',
+        data: {
+            labels: data2.map(row => row.media),
+            datasets: [
+                {
+                    label: 'Watched',
+                    data: data2.map(row => row.count)
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Movies vs TV Shows Watched 2025'
+                }
+            }
+        },
+    });
+
+    const ctxMovievsTv2025vs2024 = document.getElementById('moviesTv2025vs2024');
+
+    const data3 = [
+        {year: 2025, count: 111},
+        {year: 2024, count: 75},
+    ];
+
+    new Chart(ctxMovievsTv2025vs2024, {
+        type: 'pie',
+        data: {
+            labels: data3.map(row => row.year),
+            datasets: [
+                {
+                    label: 'Watched',
+                    data: data3.map(row => row.count)
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Wot I Watched 2025 vs 2024'
+                }
+            }
+        },
+    });
+
+    const ctxMoviesTvShowRatings2025 = document.getElementById('moviesTv2025Rating');
+
+    const data4 = [
+        {rating: "Best", count: 25},
+        {rating: "Good", count: 57},
+        {rating: "Average", count: 22},
+        {rating: "Bad", count: 5},
+    ];
+
+    const data5 = [
+        {rating: "Best", count: 27},
+        {rating: "Good", count: 33},
+        {rating: "Average", count: 5},
+        {rating: "Bad", count: 10},
+    ];
+
+    new Chart(ctxMoviesTvShowRatings2025, {
+        type: 'bar',
+        data: {
+            labels: data4.map(row => row.rating),
+            datasets: [
+                {
+                    label: '2025',
+                    data: data4.map(row => row.count)
+                },
+                {
+                    label: '2024',
+                    data: data5.map(row => row.count)
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Wot I Watched Ratings 2025 & 2024'
+                }
+            },
+        },
+    });
+
+    const data6 = [
+        {month: "Jan", count: 26},
+        {month: "Feb", count: 16},
+        {month: "Mar", count: 5},
+        {month: "Apr", count: 8},
+        {month: "May", count: 3},
+        {month: "Jun", count: 6},
+        {month: "Jul", count: 8},
+        {month: "Aug", count: 5},
+        {month: "Sep", count: 7},
+        {month: "Oct", count: 10},
+        {month: "Nov", count: 11},
+        {month: "Dec", count: 7},
+    ];
+
+    const ctxwatchByMonth2025 = document.getElementById('watchByMonth2025');
+
+    new Chart(ctxwatchByMonth2025, {
+        type: 'line',
+        data: {
+            labels: data6.map(row => row.month),
+            datasets: [
+                {
+                    label: "2025",
+                    data: data6.map(row => row.count)
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Wot I Watched 2025 By Month'
+                }
+            },
+        },
+    });
+
+    const moviesRating = [
+        {rating: "Best", count: 14},
+        {rating: "Good", count: 46},
+        {rating: "Average", count: 14},
+        {rating: "Bad", count: 5},
+    ];
+
+    const tvRating = [
+        {rating: "Best", count: 11},
+        {rating: "Good", count: 11},
+        {rating: "Average", count: 8},
+        {rating: "Bad", count: 0},
+    ];
+
+    const videoGameRating = [
+        {rating: "Best", count: 2},
+        {rating: "Good", count: 2},
+        {rating: "Average", count: 1},
+        {rating: "Bad", count: 0},
+    ];
+
+    const bookRating = [
+        {rating: "Best", count: 0},
+        {rating: "Good", count: 1},
+        {rating: "Average", count: 0},
+        {rating: "Bad", count: 0},
+    ];
+
+    const ctxConclusionChart = document.getElementById('conclusionChart');
+
+    new Chart(ctxConclusionChart, {
+        type: 'bar',
+        data: {
+            labels: moviesRating.map(row => row.rating),
+            datasets: [
+                {
+                    label: 'Movies',
+                    data: moviesRating.map(row => row.count)
+                },
+                {
+                    label: 'TV Shows',
+                    data: tvRating.map(row => row.count)
+                },
+                {
+                    label: 'Video Games',
+                    data: videoGameRating.map(row => row.count)
+                },
+                {
+                    label: 'Books',
+                    data: bookRating.map(row => row.count)
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 2,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Wot I Watched Ratings 2025 & 2024'
+                }
+            },
+        },
+    });
+</script>

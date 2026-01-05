@@ -1,0 +1,569 @@
+<html lang="en" data-bs-theme="auto" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wot I Did 2025 - A Breakdown</title>
+    <link href="../../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../assets/dist/js/fontawesome.min.js"></script>
+    <script src="../../assets/dist/js/brands.min.js"></script>
+    <script src="../../assets/dist/js/all.min.js"></script>
+</head>
+
+<main>
+    <section class="py-5 container-sm">
+        <h1 class="fw-light text-center"><a style="text-decoration: none; color: inherit" href="https://blog.terminal-control.com">Terminal Control</a></h1>
+        <div class="row py-lg-5 px-xl-5">
+            <h3 class="fw-light text-info-emphasis">Wot I Did 2025 - A Breakdown</h3>
+            <h5 class="fw-lighter text">2026/01/03</h5>
+        </div>
+
+        <div class="mx-lg-5 fs-5">
+            <div class="fs-5">
+<p>Here we are once again, it's that time of year. That is to say the end of it. Or rather the beginning of it considering when this post will be published. I hope you have had a good year, because mine has certainly been interesting.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>Life</h4>
+
+<p>The lead up to 2025 was admittedly not spectacular for myself. I had made the transatlantic trip to visit my grandparents who have been getting up there in years, and I was rewarded by being given a bout of food poisoning. Since, at the time, we didn't know if it was some sort of virus or not I had to spend Christmas stuck in an AirBnB in the hopes of not making my Grandparents sick. However, once back from Canada I was able to ring in the new year with friends, DJ'ing and watching movies getting shitfaced which was lovely.</p>
+
+<p>The first three months were fairly eventful, between entering the second year at my job and planning and performing some excellent deception for a stag in Cyprus and then getting to feel all fancy for a wedding. It was all rather lovely. I was able to visit some new places this year, going to Bristol to some friends new place and exploring a bit of Europe before and after a music festival by visiting Greece, Albania and Montenegro for the first time!</p>
+
+<p>In summer, I prepared for moving out of my place in London to go to Tokyo where I have been living these past six months. While it has been an exciting time working and wazzing myself around these Japan hinterlands, I am unfortunately about to make the journey back to the U.K. currently unsure on what I'm going to do next.</p>
+
+<p>Bummer.</p>
+
+<p>Anyway, lets talk about all the media I consumed.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>Wot I Read/Watched/Played</h4>
+
+<p>For the second year now, I have used an app called Sofa to track the video games I played, the Movies/Television shows I watched and the books that I have read. My plan initially was to try and keep the website updated month by month, but that fell by the wayside. Partially this was because of how long it takes to generate this site and write all the reviews.</p>
+
+<p>I decided that in order to reduce the friction I would spend a lot of time improving the tooling around creating the site so hopefully that sorting reviews out for this year would be faster. If you’re interested keep on reading, otherwise you can skip to the section Wot I Read - Breakdown instead.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>The Process</h4>
+
+<p>My sites are all statically generated, so this blog post and my wot I did sites are backed by a simple Go program that I wrote that basically ingests a bunch of meta information and then using Go template files generates the final site. Fairly simple stuff in the grand scheme of things, and the program was mainly written to learn more about Go templating and to allow a great deal of customisation for my very specific use cases. I am also a big fan of very simple sites, and so I didn't want to deal with the overhead of other static site generators, and hey, I figured I could maybe learn a thing or two as well!</p>
+
+<p>The process to generating a site for the year would go a little like this; First I would create a JSON file to represent the year, this file would be a meta file that would include locations to the screenshot used on the page, the location of the text file for the review and my rating (best, good, average, bad). I would need an entry for everything I had read or watched (depending on the site) and would need to create all the backing text files for the reviews. Having the reviews outside the json file just made things a lot easier to edit for both the reviews themselves and the meta information of the reviews. I would then need to write a review for every entry in the list, which was fairly laborious as I would need to remember what I thought of the piece of media (keep in mind I'm doing all this over the span of a couple of days) and then I would need to source an image to use for the site and also edit the image to reduce it's size and have it in a resolution that conformed to the requirements of the website.</p>
+
+<p>Some of these tasks are fairly menial, creating ever text file and downloading every screenshot, editing those screenshots, moving them to the correct folder and then linking them in the JSON file, were the biggest friction spots. I decided I needed to eliminate these friction points to speed things up, but I also wanted to add some new features to the site.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>The New</h4>
+<p>I decided that for the Wot I Watched site since my list was backed by an app called Sofa, which I could export the database out of the CSV file, that it might be nice to track the category of media that I had watched (Movie or TV Show). I also wanted to add a ranking to each piece of media relative to the other pieces of media that I had watched that year. I also decided to finally create a blog site where I could post some charts about what I watched compared to last year. All this meant I needed to improve the tools available to me.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>The Improved</h4>
+
+<p>Originally my site generator (cleverly called Site Generator) was a simple program that when run would just build all the sites to an output directory and that was that. So instead I decided to convert it into a CLI application using the Cobra library available for Go. This makes it fairly easy to add subcommands and flags when running the application. That way I could build in a bunch of utility commands to help speed up the making of site instead of the tool only working on the generation of the site.</p>
+
+<p>The CLI was subdivided by the site, so to run the command you would do something like:</p>
+    <p><code>site-generator wotidid [site/action]</code></p>
+<p>So to generate the site you could do:</p>
+
+    <p><code>site-generator wotidid wotiread</code></p>
+
+<p>And presto, you have a new build of the wotiread site. I also added a subcommand called “json” which you could use and provide a CSV file as input and what year you want to filter on and it would create the backing JSON file as well as create the folders and text files that store the reviews.</p>
+
+<p>Excellent! Now we need two utility commands that will allow us to set the ratings of a piece of media and the ranking of a piece of media. The rating command is very simple in that it just loops through everything in the JSON file and checks to see if a rating has been set yet. If it hasn’t then it presents the name and gives a numerical choice of 1 = best, 2 = good, etc… that you can input to set the rating. Once all the ratings have been set, the JSON file is updated. Ranking is slightly similar in that it loops through all the media to check if a ranking is set. For any media that a rank has been set then the terminal will present a list ordered by the media rank and a number next to it. From here you will see what piece of media you are ranking and then enter a number to correspond where on the list you wish to position it. We keep doing this until all media has a rank.</p>
+
+<p>Excellent, so we have made rating and ranking easier to process, now we need to figure out images.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>A Picture Is Worth A Thousand Lines Of Code</h4>
+
+<p>Perhaps the most onerous process in all this. We need to download an image for the media that we source from moviestillsdb, edit the image to scale it down and set to the correct resolution, very time consuming!</p>
+
+<p>Thankfully Go has a not bad built in image library that we can use to manipulate the image. For the sake of handling resizing we get the resize library for the sake of simplicity. We still need to manually download each image since there’s no API associated with moviestillsdb and we want to  also carefully select which image we want to use. With the image downloaded we put all images into a folder. We have the command take an input folder flag and then define a preset for images in the wotiwatched and wotiread sites (since they have different requirements). We loop through the folder, scale the image down and then in some instances we have to crop the image depending on the aspect ratio of the source image. We opt to set the boundaries to the centre of the image and more often than not that seems to be fine. Once that’s done we open the image in a preview program and then accept or reject the image.</p>
+
+<p>Finally, we need to rename all the images to be associated with their respective entries in the meta JSON file and move them. This will also be another subcommand called `move`. It checks to see if image already exists for a piece of media, if it doesn’t then it’s added to a numerical media list that then loops through the converted image folder and allows the user to associate an image to media by using the number next to the media in the list. Once selected the image is moved to the output folder and then we are done!</p>
+
+<p>All in all this process took <i>a lot</i> of time to do, probably more than if I just did all this manually but hopefully this will save me some time in the future. I also spent some time just cleaning up the code a little and figuring out what design changes I wanted to do. So with all that out of the way, lets see wot I did this year.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+    <h4>A Note On Reviews</h4>
+    <p>I spent a great deal of time writing the reviews this year. Can you tell? Probably not, because when I finished writing all the reviews I forgot about a piece of code I had written but failed to refactor away. You see in my hindsight, I had made the brilliant decision that the original generator would also generate empty review files if it couldn't find what it was looking for. This was fine until I accidentally screwed up the formatting of review locations in my JSON. This led to my refactored code pointing to the wrong folder and not finding the reviews, but legacy code pointing to the correct folder and creating new files. This ended up truncating all my reviews. I won't lie, I did want to cry a little, so I quickly wrote very quick reviews to replace the old ones. They're unfortunately short, but hopefully you get the gist.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>Wot I Read - A Breakdown</h4>
+
+<p>Every year at Christmas I generally ask for books as gifts, going into 2025 I had quite a few books to get through so lets see how I did!</p>
+
+<div>
+    <canvas id="booksRead2025vs2024"></canvas>
+</div>
+
+<p>Oh dear. What happened here?</p>
+
+<p>Reading of course is a very focused hobby, you kind of need to be focusing on what you’re reading versus movies or tv shows where you can have it on in the background and my side time for that sort of focus was down. Usually, if I’m travelling on my own I end up smashing through quite a lot of books, but this year I spent a lot of time travelling with others and generally my down time was spent socialising. When I was back in the UK I was spending a lot of my spare time preparing to move or learning a bit of Japanese. Then when I was in Japan, again I was spending free time learning Japanese but I did work to finish the book before the year was over.</p>
+
+<p>The one book I read this year was The Savage Storm. An interesting book on the Italian campaign from the perspective of the military sides involved and the civilians caught in-between. It could be a bit dry at times, but was overall entertaining.</p>
+
+<p>I think 2026 I will definitely beat this because I’m currently powering through Say Nothing, which has so far been excellent and I am reading the classic graphic novel From Hell. I imagine things will slow down when I get to my book on the making of the atomic bomb since it’s quite a tomb, so we will see how I get on this year.</p>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>Wot I Watched - A Breakdown</h4>
+
+<p>Alright, here we go. Lets have a look at some charts for this:</p>
+
+<div>
+    <canvas id="moviesTv2025"></canvas>
+</div>
+
+<p>More Movies than TV Shows, which is generally not too surprising when you consider the time commitment required for TV. I actually thought I had watched a more equal number of shows. How does this compare to last year?</p>
+
+<div>
+    <canvas id="moviesTv2025vs2024"></canvas>
+</div>
+
+<p>More was watched this year, which does feel a bit surprising. I feel like I had actually been slacking on my input, part of this could be because I don’t think I started tracking in 2024 from the beginning of the year which might explain the difference. What about the quality of things I have watched?</p>
+
+<div>
+    <canvas id="moviesTv2025Rating"></canvas>
+</div>
+
+<p>It looks like 2025 was a good year overall, there was over a four time increase in average movies, but that was maybe just because this year was very strong in my mind so I think anything that didn’t stand out got judged rather harshly. What was my most watched month?</p>
+
+<div>
+    <canvas id="watchByMonth2025"></canvas>
+</div>
+
+<p>Wow. January was crazy, I think this was probably because I spent a lot of time just smashing through movies at the beginning of the year. I was still far enough away from Japan to not need to really be focusing on the move and it was probably the month where I had the most free time before things started to ramp up with my free time getting eaten up. The rest of year seems fairly consistent.</p>
+
+<p>Here are my movie rankings, I wouldn’t take this too seriously. It was fairly rapid fire and every time I would do it, I would end up with quite a different list so make of that what you will.</p>
+
+<h5>Movies</h5>
+<ol>
+    <li>Anatomy of a Fall</li>
+    <li>Shall We Dance?</li>
+    <li>Nosferatu</li>
+    <li>Aftersun</li>
+    <li>Challengers</li>
+    <li>Fear and Loathing in Las Vegas</li>
+    <li>Judgment at Nuremberg</li>
+    <li>Black Bag</li>
+    <li>In the Heat of the Night</li>
+    <li>The Apprentice</li>
+    <li>BlackBerry</li>
+    <li>To Live and Die in L.A.</li>
+    <li>True Romance</li>
+    <li>Suzume</li>
+    <li>All of Us Strangers</li>
+    <li>KPop Demon Hunters</li>
+    <li>Beyond the Infinite Two Minutes</li>
+    <li>The Phoenician Scheme</li>
+    <li>Eighth Grade</li>
+    <li>Manhunter</li>
+    <li>The Holdovers</li>
+    <li>Twelve Monkeys</li>
+    <li>When Harry Met Sally...</li>
+    <li>The End of the Tour</li>
+    <li>The Shawshank Redemption</li>
+    <li>Warfare</li>
+    <li>Lost in Translation</li>
+    <li>We Live in Time</li>
+    <li>TÁR</li>
+    <li>The Taking of Pelham One Two Three</li>
+    <li>The Taking of Pelham 1 2 3</li>
+    <li>Moonrise Kingdom</li>
+    <li>Godzilla Minus One</li>
+    <li>About a Boy</li>
+    <li>Jay Kelly</li>
+    <li>Bridget Jones's Diary</li>
+    <li>Royal Warriors</li>
+    <li>The Lunchbox</li>
+    <li>The Russia House</li>
+    <li>Manchester by the Sea</li>
+    <li>Navy Seals</li>
+    <li>The Godfather Part III</li>
+    <li>Fallen Angels</li>
+    <li>Furiosa: A Mad Max Saga</li>
+    <li>Interview with the Vampire</li>
+    <li>Civil War</li>
+    <li>Infernal Affairs</li>
+    <li>Babel</li>
+    <li>Filth</li>
+    <li>The Lincoln Lawyer</li>
+    <li>Hidden Agenda</li>
+    <li>The Fast and the Furious</li>
+    <li>Escape from Alcatraz</li>
+    <li>Cape Fear</li>
+    <li>Fallen Leaves</li>
+    <li>Doubt</li>
+    <li>Mickey 17</li>
+    <li>Blue Velvet</li>
+    <li>The Thomas Crown Affair</li>
+    <li>Beetlejuice Beetlejuice</li>
+    <li>Wallace & Gromit: Vengeance Most Fowl</li>
+    <li>The Mule</li>
+    <li>Midway</li>
+    <li>Asteroid City</li>
+    <li>Gladiator II</li>
+    <li>American Fiction</li>
+    <li>The Sentinel</li>
+    <li>The Last Full Measure</li>
+    <li>The Infiltrator</li>
+    <li>The Batman</li>
+    <li>She Said</li>
+    <li>Roman J. Israel, Esq.</li>
+    <li>Before the Devil Knows You're Dead</li>
+    <li>The Family Man</li>
+    <li>The English Patient</li>
+    <li>Marshall</li>
+    <li>Fracture</li>
+    <li>John Q</li>
+    <li>Jack Ryan: Shadow Recruit</li>
+    <li>A House of Dynamite</li>
+    <li>F1 The Movie</li>
+</ol>
+
+<h5>TV Shows</h5>
+<ol>
+    <li>The Studio</li>
+    <li>Atlanta</li>
+    <li>Shōgun</li>
+    <li>Long Story Short</li>
+    <li>Smiling Friends</li>
+    <li>Delicious in Dungeon</li>
+    <li>Frieren: Beyond Journey's End</li>
+    <li>Pluribus (Season 1)</li>
+    <li>Fargo (Season 5)</li>
+    <li>Silo</li>
+    <li>Manhattan</li>
+    <li>Mr. & Mrs. Smith</li>
+    <li>Slow Horses</li>
+    <li>Generation Kill (Rewatch)</li>
+    <li>Fullmetal Alchemist: Brotherhood (Rewatch)</li>
+    <li>1883</li>
+    <li>BoJack Horseman (Rewatch)</li>
+    <li>Yellowstone</li>
+    <li>Kyojo</li>
+    <li>INVINCIBLE</li>
+    <li>Your Friends & Neighbors</li>
+    <li>House of Guinness</li>
+    <li>Adolescence</li>
+    <li>Dept. Q</li>
+    <li>SAS Rogue Heroes</li>
+    <li>The Diplomat</li>
+    <li>Tehran</li>
+    <li>Black Bird</li>
+    <li>Death by Lightning</li>
+    <li>Fargo (Season 4)</li>
+</ol>
+</div>
+
+<div class="my-lg-5 fs-5">
+<h4>Wot I Played</h4>
+
+<p>I have been feeling the pull of video games once again in a way that I hadn’t for quite some time which has been nice. This is probably because I got a Steam Deck at Christmas in 2024 and being in Japan without my main computer has been sitting on the couch chilling out and whacking through some games. I don’t play extensively so the list is never big, but it has been a good time. Since there’s so few games, it’s probably just worth reading the site itself there’s very little reason to make a chart specifically for this.</p>
+
+<h5>Ranking</h5>
+<ol>
+    <li>Dispatch</li>
+    <li>Thank Goodness You're Here!</li>
+    <li>Baldur's Gate 3</li>
+    <li>Star Wars Jedi: Fallen Order</li>
+    <li>Harold Halibut</li>
+</ol>
+
+</div>
+<div class="my-lg-5 fs-5">
+<h4>Overall</h4>
+
+<p>Here’s one last chart that gives you the rating for every piece of media from this year, just so you can get an idea overall. I have split them into their specific categories.</p>
+
+<div>
+    <canvas id="conclusionChart"></canvas>
+</div>
+</div>
+
+
+<p>Thanks for reading, may 2026 bring exciting changes!<p>
+
+
+        </div>
+        <hr />
+        <div class="py-5 mx-lg-5 fs-6">
+            <a href="../../rss.xml"><i class="fa-solid fa-rss"></i></a>
+        </div>
+    </section>
+</main>
+
+
+<script src="../../assets/dist/js/chart.js"></script>
+
+
+<script>
+const ctxBooksRead2025vs2024 = document.getElementById('booksRead2025vs2024');
+
+const data = [
+    {year: 2024, count: 11},
+    {year: 2025, count: 1},
+];
+
+new Chart(ctxBooksRead2025vs2024, {
+    type: 'pie',
+    data: {
+        labels: data.map(row => row.year),
+        datasets: [
+            {
+                label: 'Books Read By Year',
+                data: data.map(row => row.count)
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Books Read 2024 vs 2025'
+            }
+        }
+    },
+});
+
+const ctxMovievsTv2025 = document.getElementById('moviesTv2025');
+
+const data2 = [
+    {media: "TV Shows", count: 30},
+    {media: "Movies", count: 81},
+];
+
+new Chart(ctxMovievsTv2025, {
+    type: 'pie',
+    data: {
+        labels: data2.map(row => row.media),
+        datasets: [
+            {
+                label: 'Watched',
+                data: data2.map(row => row.count)
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Movies vs TV Shows Watched 2025'
+            }
+        }
+    },
+});
+
+const ctxMovievsTv2025vs2024 = document.getElementById('moviesTv2025vs2024');
+
+const data3 = [
+    {year: 2025, count: 111},
+    {year: 2024, count: 75},
+];
+
+new Chart(ctxMovievsTv2025vs2024, {
+    type: 'pie',
+    data: {
+        labels: data3.map(row => row.year),
+        datasets: [
+            {
+                label: 'Watched',
+                data: data3.map(row => row.count)
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Wot I Watched 2025 vs 2024'
+            }
+        }
+    },
+});
+
+const ctxMoviesTvShowRatings2025 = document.getElementById('moviesTv2025Rating');
+
+const data4 = [
+    {rating: "Best", count: 25},
+    {rating: "Good", count: 57},
+    {rating: "Average", count: 22},
+    {rating: "Bad", count: 5},
+];
+
+const data5 = [
+    {rating: "Best", count: 27},
+    {rating: "Good", count: 33},
+    {rating: "Average", count: 5},
+    {rating: "Bad", count: 10},
+];
+
+new Chart(ctxMoviesTvShowRatings2025, {
+    type: 'bar',
+    data: {
+        labels: data4.map(row => row.rating),
+        datasets: [
+            {
+                label: '2025',
+                data: data4.map(row => row.count)
+            },
+            {
+                label: '2024',
+                data: data5.map(row => row.count)
+            },
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Wot I Watched Ratings 2025 & 2024'
+            }
+        },
+    },
+});
+
+const data6 = [
+    {month: "Jan", count: 26},
+    {month: "Feb", count: 16},
+    {month: "Mar", count: 5},
+    {month: "Apr", count: 8},
+    {month: "May", count: 3},
+    {month: "Jun", count: 6},
+    {month: "Jul", count: 8},
+    {month: "Aug", count: 5},
+    {month: "Sep", count: 7},
+    {month: "Oct", count: 10},
+    {month: "Nov", count: 11},
+    {month: "Dec", count: 7},
+];
+
+const ctxwatchByMonth2025 = document.getElementById('watchByMonth2025');
+
+new Chart(ctxwatchByMonth2025, {
+    type: 'line',
+    data: {
+        labels: data6.map(row => row.month),
+        datasets: [
+            {
+                label: "2025",
+                data: data6.map(row => row.count)
+            },
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Wot I Watched 2025 By Month'
+            }
+        },
+    },
+});
+
+const moviesRating = [
+    {rating: "Best", count: 14},
+    {rating: "Good", count: 46},
+    {rating: "Average", count: 14},
+    {rating: "Bad", count: 5},
+];
+
+const tvRating = [
+    {rating: "Best", count: 11},
+    {rating: "Good", count: 11},
+    {rating: "Average", count: 8},
+    {rating: "Bad", count: 0},
+];
+
+const videoGameRating = [
+    {rating: "Best", count: 2},
+    {rating: "Good", count: 2},
+    {rating: "Average", count: 1},
+    {rating: "Bad", count: 0},
+];
+
+const bookRating = [
+    {rating: "Best", count: 0},
+    {rating: "Good", count: 1},
+    {rating: "Average", count: 0},
+    {rating: "Bad", count: 0},
+];
+
+const ctxConclusionChart = document.getElementById('conclusionChart');
+
+new Chart(ctxConclusionChart, {
+    type: 'bar',
+    data: {
+        labels: moviesRating.map(row => row.rating),
+        datasets: [
+            {
+                label: 'Movies',
+                data: moviesRating.map(row => row.count)
+            },
+            {
+                label: 'TV Shows',
+                data: tvRating.map(row => row.count)
+            },
+            {
+                label: 'Video Games',
+                data: videoGameRating.map(row => row.count)
+            },
+            {
+                label: 'Books',
+                data: bookRating.map(row => row.count)
+            },
+        ]
+    },
+    options: {
+        responsive: true,
+        aspectRatio: 2,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Wot I Watched Ratings 2025 & 2024'
+            }
+        },
+    },
+});
+</script>
