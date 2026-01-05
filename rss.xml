@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+    <channel>
+        <title>Blog - Terminal Control</title>
+        <link>https://blog.terminal-control.com</link>
+        <description>Musings from Terminal Control</description>
+        <item>
+            <title>All Of 2025 Reviewed!</title>
+            <link>https://wotiwatched.terminal-control.com</link>
+            <description>Movies and TV shows that I have watched for 2025 have now been reviewed. Be sure to check out the list!</description>
+        </item>
+        <item>
+            <title>January 2025 Reviewed!</title>
+            <link>https://wotiwatched.terminal-control.com</link>
+            <description>Movies and TV shows that I have watched, have now been reviewed. Be sure to check out the list!</description>
+        </item>
+    </channel>
+
+</rss>
