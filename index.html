@@ -1,22 +1,317 @@
 <html lang="en" data-bs-theme="auto">
-<head>
+  <head>
+    <script src="assets/js/color-modes.js"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blog · Terminal Control</title>
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <title>Terminal Control · Wot I Played</title>
+
+<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  .b-example-divider {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  }
+  .b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+  }
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+  .nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+  }
+  .bd-mode-toggle {
+    z-index: 1500;
+  }
+  .bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+  }
+  .card-review {
+    background-color: white;
+    color: black;
+    text-align: justify;
+  }
+  .card-favorite {
+    border-color: gold;
+    border-style: solid;
+    border-width: medium;
+  }
+</style>
+
+    
+  </head>
+  <body>
 
 <main>
-    <section class="py-5 text-center container">
-        <h1 class="fw-light">Terminal Control</h1>
-        <div class="row py-lg-5">
-            
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Wot I Played</h1>
+        <p class="lead text-body-secondary">Below is a list of everything that I have played broken up by years with a mini-review attached to each one. Things I loved are highlighted.</p>
+        <p>
+        
+          <a href="https://wotiread.terminal-control.com/" class="btn btn-info my-2">Wot I Read 📖</a>
+        
+          <a href="https://wotiwatched.terminal-control.com/" class="btn btn-info my-2">Wot I Watched 🎥</a>
+        
+        </p>
+        <div class="btn-group" role="group" aria-label="Year Selector">
+          
+              
+              
+              
+                <button type="button" class="btn btn-secondary btn-info">2025</button>
+              
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <h2>2025</h2>
+      <hr />
+      <div id="accordionMedia" class="overflow-hidden mb-3">
+      
+        <div class="mb-3">
+        <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3 g-3 gy-3">
+        
+          <div class="col">
+            <div class="card shadow-sm ">
+              <a data-bs-toggle="collapse" href="#mediaReview00" role="button" aria-expanded="false" aria-controls="mediaReview00">
                 
-            <div class="row py-lg-2 col-lg-10 col-md-10 mx-auto">
-                <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="posts/2026/wotididbreakdown.html"><h2 class="fw-light">Wot I Did 2025 - A Breakdown</h2></a>
-                <p class="lead text-body-secondary">2026/01/03</p>
+                <img src="images/2025/screenshot/starwarsjedifallenorder_17_05_2025.jpg" width="100%"/>
+              </a>
+            </div>
+          </div>
+        
+          <div class="col">
+            <div class="card shadow-sm ">
+              <a data-bs-toggle="collapse" href="#mediaReview01" role="button" aria-expanded="false" aria-controls="mediaReview01">
+                
+                <img src="images/2025/screenshot/thankgoodnessyourehere_19_05_2025.jpg" width="100%"/>
+              </a>
+            </div>
+          </div>
+        
+          <div class="col">
+            <div class="card shadow-sm card-favorite">
+              <a data-bs-toggle="collapse" href="#mediaReview02" role="button" aria-expanded="false" aria-controls="mediaReview02">
+                
+                <img src="images/2025/screenshot/baldursgate3_12_07_2025.jpg" width="100%"/>
+              </a>
+            </div>
+          </div>
+        
+        </div>
+        
+        <div class="collapse col-md-12 mb-3" data-bs-parent="#accordionMedia" id="mediaReview00">
+          <div class="card card-body card-review">
+            <div class="d-flex justify-content-between">
+                <h4>Star Wars Jedi: Fallen Order</h4>
+                <h3>👍</h3>
             </div>
             
+            <div class="d-flex justify-content-start">
+              <h5>Ranking: 4 (🎮)</h5>
+            </div>
+            
+            <hr />
+            <div class="d-flex">
+              <div>
+                Was fun! I&#39;m glad I got to finish it. Unfortunately the sequel is not compatible with my Steam Deck, so I&#39;m stuck
+until I get home to play the sequel.
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+        
+        <div class="collapse col-md-12 mb-3" data-bs-parent="#accordionMedia" id="mediaReview01">
+          <div class="card card-body card-review">
+            <div class="d-flex justify-content-between">
+                <h4>Thank Goodness You&#39;re Here!</h4>
+                <h3>👍</h3>
+            </div>
+            
+            <div class="d-flex justify-content-start">
+              <h5>Ranking: 2 (🎮)</h5>
+            </div>
+            
+            <hr />
+            <div class="d-flex">
+              <div>
+                Oh my god, what charm, what fun, this was utterly fantastic. Very quick so you can power through it quickly, but
+this game just oozes charm. Give it a go!
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="collapse col-md-12 mb-3" data-bs-parent="#accordionMedia" id="mediaReview02">
+          <div class="card card-body card-review">
+            <div class="d-flex justify-content-between">
+                <h4>Baldur&#39;s Gate 3</h4>
+                <h3>🏅</h3>
+            </div>
+            
+            <div class="d-flex justify-content-start">
+              <h5>Ranking: 3 (🎮)</h5>
+            </div>
+            
+            <hr />
+            <div class="d-flex">
+              <div>
+                I actually started this in 2024 and got to the third act, but then took a very long break. I&#39;m not sure why I bounced
+off, I just did. Nevertheless, when I came back I really enjoyed the ending. I think overall this was a superb game even
+if my approach to the game was probably a bit bad.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+      
+        <div class="mb-3">
+        <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3 g-3 gy-3">
+        
+          <div class="col">
+            <div class="card shadow-sm ">
+              <a data-bs-toggle="collapse" href="#mediaReview10" role="button" aria-expanded="false" aria-controls="mediaReview10">
+                
+                <img src="images/2025/screenshot/haroldhalibut_07_09_2025.jpg" width="100%"/>
+              </a>
+            </div>
+          </div>
+        
+          <div class="col">
+            <div class="card shadow-sm card-favorite">
+              <a data-bs-toggle="collapse" href="#mediaReview11" role="button" aria-expanded="false" aria-controls="mediaReview11">
+                
+                <img src="images/2025/screenshot/dispatch_27_11_2025.jpg" width="100%"/>
+              </a>
+            </div>
+          </div>
+        
+        </div>
+        
+        <div class="collapse col-md-12 mb-3" data-bs-parent="#accordionMedia" id="mediaReview10">
+          <div class="card card-body card-review">
+            <div class="d-flex justify-content-between">
+                <h4>Harold Halibut</h4>
+                <h3>😐</h3>
+            </div>
+            
+            <div class="d-flex justify-content-start">
+              <h5>Ranking: 5 (🎮)</h5>
+            </div>
+            
+            <hr />
+            <div class="d-flex">
+              <div>
+                I think this game look goods, and it has a vibe, but I ultimately didn&#39;t really enjoy my time with this game. It was
+a bit of a slog. I will say I thought this had a very German Video Game vibe to it, and it turned out I was right.
+Make of that what you will.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="collapse col-md-12 mb-3" data-bs-parent="#accordionMedia" id="mediaReview11">
+          <div class="card card-body card-review">
+            <div class="d-flex justify-content-between">
+                <h4>Dispatch</h4>
+                <h3>🏅</h3>
+            </div>
+            
+            <div class="d-flex justify-content-start">
+              <h5>Ranking: 1 (🎮)</h5>
+            </div>
+            
+            <hr />
+            <div class="d-flex">
+              <div>
+                I loved this game. It is just a fun, well written classic Telltale type of game. I think they were very smart with
+their approach to this game and I look forward to seeing what season 2 brings.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+      
+      </div>
+    </div>
+  </div>
 </main>
+
+<footer class="text-body-secondary py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-1">Made With Love</p>
+    <p class="mb-1">
+      <a href="rss.xml">
+        Follow on RSS!
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+        </svg>
+      </a>
+    </p>
+  </div>
+</footer>
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
